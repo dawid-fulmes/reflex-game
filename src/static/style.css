@@ -1,0 +1,85 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 0 1.2rem;
+}
+
+.title {
+    font-size: 2rem;
+    margin: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.panel {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.board {
+    padding: 1px;
+    min-width: 300px;
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+    border: 1px solid #000;
+}
+
+.board__box {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+}
+
+.controls {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 500px;
+}
+
+.btn {
+    background-color: #96b1fa;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    transform: translateY(0);
+    transition: transform .1s, background-color .3s;
+}
+
+.btn:hover {
+    background-color: #cad7fa;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
