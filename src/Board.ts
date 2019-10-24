@@ -1,3 +1,5 @@
+import Box from "./Box";
+
 class Board {
   private element: HTMLElement;
   private rows: number;
@@ -14,9 +16,8 @@ class Board {
     this.element.style.gridTemplateRows = `repeat(${this.rows}, 1fr)`;
 
     for (let i = 0; i < this.rows * this.columns; i++) {
-      const square: HTMLElement = document.createElement("div");
-      square.className = "board__box";
-      this.element.appendChild(square);
+      const box = new Box(i);
+      this.element.appendChild(box.getElement());
     }
   }
 }
