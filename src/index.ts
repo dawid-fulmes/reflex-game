@@ -1,6 +1,6 @@
 import config from "./config";
-import Board from "./Board";
+import Game from "./Game";
 
-const [rows, columns] = config.squaresNumber;
-const board = new Board(rows, columns || rows);
-board.draw();
+const [rows, columns] = config.boxNumber;
+const game = new Game(rows, columns || rows);
+game.init();

@@ -1,4 +1,4 @@
 export default {
-  // [rows, columns] (if only rows, it will be square board)
-  squaresNumber: [5],
+  // [rows, columns] (if only rows, board will be square)
+  boxNumber: [5],
 };
