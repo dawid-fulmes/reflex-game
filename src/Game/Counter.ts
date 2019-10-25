@@ -7,6 +7,15 @@ class Counter {
     this.value = initialValue;
     this.element.textContent = this.value.toString();
   }
+
+  getValue(): number {
+    return this.value;
+  }
+
+  decrement(): void {
+    this.value = this.value - 1;
+    this.element.textContent = this.value.toString();
+  }
 }
 
 export default Counter;

@@ -6,6 +6,7 @@ class Game {
   private livesCounter: Counter;
   private pointsCounter: Counter;
   private timeCounter: Counter;
+  private timeout: number;
 
   constructor(
     boardRows: number,
@@ -17,10 +18,36 @@ class Game {
     this.livesCounter = new Counter("lives", maxLives);
     this.pointsCounter = new Counter("points");
     this.timeCounter = new Counter("time", maxTime);
+    this.timeout = null;
   }
 
-  init() {
+  init(): void {
     this.board.draw();
+  }
+
+  start(): void {
+    if (this.timeout !== null) {
+      return;
+    }
+
+    const tickTime = (): void => {
+      this.timeCounter.decrement();
+      if (this.timeCounter.getValue() > 0) {
+        this.timeout = window.setTimeout(tickTime, 1000);
+      } else {
+        //End Game
+      }
+    };
+    this.timeout = window.setTimeout(tickTime, 1000);
+  }
+
+  reset(): void {
+    if (this.timeout === null) {
+      return;
+    }
+
+    window.clearTimeout(this.timeout);
+    this.timeout = null;
   }
 }
 
