@@ -12,7 +12,7 @@ class Game {
   private state: "INITIAL" | "GAME" | "END";
   private startButton: Button;
   private resetButton: Button;
-  public alert: Alert;
+  private alert: Alert;
 
   constructor(
     boardRows: number,
@@ -21,17 +21,13 @@ class Game {
     maxTime: number
   ) {
     this.board = new Board(this, boardRows, boardColumns || boardRows);
+    this.alert = new Alert();
     this.livesCounter = new Counter("lives", maxLives);
     this.pointsCounter = new Counter("points");
-    this.timeCounter = new TimeCounter(maxTime, this);
+    this.timeCounter = new TimeCounter(maxTime, this, this.alert);
     this.state = "INITIAL";
-    this.alert = new Alert();
     this.startButton = new Button(this, "start");
     this.resetButton = new Button(this, "reset");
-  }
-
-  init(): void {
-    this.board.draw();
   }
 
   start(): void {

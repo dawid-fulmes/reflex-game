@@ -16,9 +16,10 @@ class Board {
     this.element = document.querySelector(".board");
     this.boxes = [];
     this.boxesActivationTimeout = null;
+    this.draw();
   }
 
-  draw(): void {
+  private draw(): void {
     this.element.style.gridTemplateColumns = `repeat(${this.columns}, 1fr)`;
     this.element.style.gridTemplateRows = `repeat(${this.rows}, 1fr)`;
 
