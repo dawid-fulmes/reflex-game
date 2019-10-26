@@ -59,7 +59,6 @@ html {
 }
 
 .controls {
-    margin-top: 0.5rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -90,15 +89,19 @@ html {
 }
 
 .alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 1;
     text-align: center;
     border-radius: 10px;
-    padding: 10px;
+    height: 4rem;
+    margin: 5px;
     color: red;
-    transition: opacity 0.1s;
+    transition: opacity 0.3s;
+    flex-grow: 1;
 }
 
 .alert--hidden {
     opacity: 0;
-
 }

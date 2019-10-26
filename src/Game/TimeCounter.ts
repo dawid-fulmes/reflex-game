@@ -16,6 +16,7 @@ class TimeCounter extends Counter {
     if (this.getValue() > 0) {
       this.timeout = window.setTimeout(() => this.tickTime(), 1000);
     } else {
+      this.game.alert.show("TIME_END");
       this.game.finish();
     }
   }

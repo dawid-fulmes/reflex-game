@@ -1,6 +1,7 @@
 import Board from "./Board";
 import Counter from "./Counter";
 import TimeCounter from "./TimeCounter";
+import Alert from "./Alert";
 
 class Game {
   private board: Board;
@@ -8,7 +9,7 @@ class Game {
   private pointsCounter: Counter;
   private timeCounter: TimeCounter;
   private state: "INITIAL" | "GAME" | "END";
-  private highlightedBoxId: number;
+  public alert: Alert;
 
   constructor(
     boardRows: number,
@@ -21,6 +22,7 @@ class Game {
     this.pointsCounter = new Counter("points");
     this.timeCounter = new TimeCounter(maxTime, this);
     this.state = "INITIAL";
+    this.alert = new Alert();
   }
 
   init(): void {
@@ -46,6 +48,7 @@ class Game {
     this.timeCounter.reset();
     this.livesCounter.reset();
     this.pointsCounter.reset();
+    this.alert.hide();
     this.state = "INITIAL";
   }
 
@@ -67,7 +70,10 @@ class Game {
   loseLife(): void {
     this.livesCounter.decrement();
     if (this.livesCounter.getValue() < 1) {
+      this.alert.show("GAME_LOST");
       this.finish();
+    } else {
+      this.alert.flash("LIFE_LOST");
     }
   }
 }
