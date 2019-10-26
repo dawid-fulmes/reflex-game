@@ -47,12 +47,15 @@ class Game {
   }
 
   reset(): void {
+    console.log("reset");
     if (this.state === "INITIAL") {
       return;
     }
 
     window.clearTimeout(this.timeout);
     this.timeout = null;
+    this.board.clearBoxesActivationTimeout();
+    this.board.deactivateAllBoxes();
     this.state = "INITIAL";
   }
 
@@ -61,6 +64,7 @@ class Game {
     if (this.timeout !== null) {
       window.clearTimeout(this.timeout);
     }
+    this.board.deactivateAllBoxes();
     this.board.clearBoxesActivationTimeout();
   }
 

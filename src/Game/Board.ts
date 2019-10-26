@@ -43,6 +43,13 @@ class Board {
     window.clearTimeout(this.boxesActivationTimeout);
     this.boxesActivationTimeout = null;
   }
+
+  deactivateAllBoxes(): void {
+    this.boxes.forEach(box => {
+      box.clearDeactivationTimeout();
+      box.deactivate();
+    });
+  }
 }
 
 export default Board;
