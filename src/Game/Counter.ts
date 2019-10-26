@@ -19,6 +19,11 @@ class Counter {
     this.element.textContent = this.value.toString();
   }
 
+  increment(): void {
+    this.value = this.value + 1;
+    this.element.textContent = this.value.toString();
+  }
+
   reset(): void {
     this.value = this.initialValue;
     this.element.textContent = this.value.toString();

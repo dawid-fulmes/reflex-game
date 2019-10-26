@@ -59,6 +59,17 @@ class Game {
   getState(): "INITIAL" | "GAME" | "END" {
     return this.state;
   }
+
+  scorePoint(): void {
+    this.pointsCounter.increment();
+  }
+
+  loseLife(): void {
+    this.livesCounter.decrement();
+    if (this.livesCounter.getValue() < 1) {
+      this.finish();
+    }
+  }
 }
 
 export default Game;

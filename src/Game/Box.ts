@@ -24,7 +24,10 @@ class Box {
   activate(): void {
     this.isActive = true;
     this.element.style.backgroundColor = "green";
-    this.deactivationTimeout = window.setTimeout(() => this.deactivate(), 2000);
+    this.deactivationTimeout = window.setTimeout(() => {
+      this.game.loseLife();
+      this.deactivate();
+    }, 2000);
   }
 
   deactivate(): void {
@@ -40,10 +43,9 @@ class Box {
     if (this.isActive) {
       this.clearDeactivationTimeout();
       this.deactivate();
-      // Gain Point
+      this.game.scorePoint();
     } else {
-      console.log("inactive");
-      // Lose Life
+      this.game.loseLife();
     }
   }
 
