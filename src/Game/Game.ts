@@ -1,12 +1,12 @@
 import Board from "./Board";
 import Counter from "./Counter";
+import TimeCounter from "./TimeCounter";
 
 class Game {
   private board: Board;
   private livesCounter: Counter;
   private pointsCounter: Counter;
-  private timeCounter: Counter;
-  private timeout: number;
+  private timeCounter: TimeCounter;
   private state: "INITIAL" | "GAME" | "END";
   private highlightedBoxId: number;
 
@@ -19,8 +19,7 @@ class Game {
     this.board = new Board(this, boardRows, boardColumns || boardRows);
     this.livesCounter = new Counter("lives", maxLives);
     this.pointsCounter = new Counter("points");
-    this.timeCounter = new Counter("time", maxTime);
-    this.timeout = null;
+    this.timeCounter = new TimeCounter(maxTime, this);
     this.state = "INITIAL";
   }
 
@@ -34,15 +33,7 @@ class Game {
     }
 
     this.state = "GAME";
-    const tickTime = (): void => {
-      this.timeCounter.decrement();
-      if (this.timeCounter.getValue() > 0) {
-        this.timeout = window.setTimeout(tickTime, 1000);
-      } else {
-        this.finish();
-      }
-    };
-    this.timeout = window.setTimeout(tickTime, 1000);
+    this.timeCounter.start();
     this.board.activateRandomBox();
   }
 
@@ -52,18 +43,15 @@ class Game {
       return;
     }
 
-    window.clearTimeout(this.timeout);
-    this.timeout = null;
-    this.board.clearBoxesActivationTimeout();
+    this.timeCounter.stop();
     this.board.deactivateAllBoxes();
+    this.board.clearBoxesActivationTimeout();
     this.state = "INITIAL";
   }
 
   finish(): void {
     this.state = "END";
-    if (this.timeout !== null) {
-      window.clearTimeout(this.timeout);
-    }
+    this.timeCounter.stop();
     this.board.deactivateAllBoxes();
     this.board.clearBoxesActivationTimeout();
   }
