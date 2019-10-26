@@ -38,14 +38,14 @@ class Game {
   }
 
   reset(): void {
-    console.log("reset");
     if (this.state === "INITIAL") {
       return;
     }
 
-    this.timeCounter.stop();
-    this.board.deactivateAllBoxes();
-    this.board.clearBoxesActivationTimeout();
+    this.finish();
+    this.timeCounter.reset();
+    this.livesCounter.reset();
+    this.pointsCounter.reset();
     this.state = "INITIAL";
   }
 
