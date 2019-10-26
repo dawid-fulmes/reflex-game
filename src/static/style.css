@@ -13,15 +13,14 @@ html {
 .wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin: 0 auto;
-    max-width: 1024px;
-    padding: 0 1.2rem;
+    width: 70vmin;
 }
 
 .title {
-    font-size: 2rem;
-    margin: 1.5rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin: 0.5rem;
     text-align: center;
     font-weight: bold;
 }
@@ -35,48 +34,71 @@ html {
 
 .panel {
     display: flex;
-    justify-content: space-around;
     width: 100%;
-    padding: 0.5rem;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.panel__value {
+    font-weight: bold;
+    margin: 0 0.1rem;
 }
 
 .board {
+    width: 70vmin;
+    height: 70vmin;
     display: grid;
-    grid-gap: 1px;
-    padding: 1px;
-    border: 1px solid #000;
+    grid-gap: 5px;
+
 }
 
 .board__box {
-    width: 30px;
-    height: 30px;
+    width: 100%;
+    height: 100%;
     border: 1px solid #000;
 }
 
 .controls {
-    padding: 0.5rem;
+    margin-top: 0.5rem;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
-    max-width: 500px;
 }
 
 .btn {
+    color: black;
     background-color: #96b1fa;
-    border-radius: 5px;
-    border: none;
+    border-radius: 7px;
+    border: 1px solid #000;
     cursor: pointer;
     font-family: inherit;
     font-size: 1rem;
-    padding: 1rem 1.5rem;
-    transform: translateY(0);
-    transition: transform .1s, background-color .3s;
+    padding: 0.5rem 1rem;
+    transition: background-color .3s;
 }
 
-.btn:hover {
+.btn:disabled,
+.btn:disabled:hover {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.btn:hover,
+.btn:active {
     background-color: #cad7fa;
 }
 
-.btn:active {
-    transform: translateY(1px);
+.alert {
+    opacity: 1;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    color: red;
+    transition: opacity 0.1s;
+}
+
+.alert--hidden {
+    opacity: 0;
+
 }
