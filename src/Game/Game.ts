@@ -2,6 +2,7 @@ import Board from "./Board";
 import Counter from "./Counter";
 import TimeCounter from "./TimeCounter";
 import Alert from "./Alert";
+import Button from "./Button";
 
 class Game {
   private board: Board;
@@ -9,6 +10,8 @@ class Game {
   private pointsCounter: Counter;
   private timeCounter: TimeCounter;
   private state: "INITIAL" | "GAME" | "END";
+  private startButton: Button;
+  private resetButton: Button;
   public alert: Alert;
 
   constructor(
@@ -23,6 +26,8 @@ class Game {
     this.timeCounter = new TimeCounter(maxTime, this);
     this.state = "INITIAL";
     this.alert = new Alert();
+    this.startButton = new Button(this, "start");
+    this.resetButton = new Button(this, "reset");
   }
 
   init(): void {
@@ -37,6 +42,8 @@ class Game {
     this.state = "GAME";
     this.timeCounter.start();
     this.board.activateRandomBox();
+    this.startButton.disable();
+    this.resetButton.enable();
   }
 
   reset(): void {
@@ -50,6 +57,8 @@ class Game {
     this.pointsCounter.reset();
     this.alert.hide();
     this.state = "INITIAL";
+    this.startButton.enable();
+    this.resetButton.disable();
   }
 
   finish(): void {
