@@ -8,6 +8,7 @@ class Game {
   private timeCounter: Counter;
   private timeout: number;
   private state: "INITIAL" | "GAME" | "END";
+  private highlightedBoxId: number;
 
   constructor(
     boardRows: number,
@@ -15,7 +16,7 @@ class Game {
     maxLives: number,
     maxTime: number
   ) {
-    this.board = new Board(boardRows, boardColumns || boardRows);
+    this.board = new Board(this, boardRows, boardColumns || boardRows);
     this.livesCounter = new Counter("lives", maxLives);
     this.pointsCounter = new Counter("points");
     this.timeCounter = new Counter("time", maxTime);
@@ -42,6 +43,7 @@ class Game {
       }
     };
     this.timeout = window.setTimeout(tickTime, 1000);
+    this.board.activateRandomBox();
   }
 
   reset(): void {
@@ -59,6 +61,11 @@ class Game {
     if (this.timeout !== null) {
       window.clearTimeout(this.timeout);
     }
+    this.board.clearBoxesActivationTimeout();
+  }
+
+  getState(): "INITIAL" | "GAME" | "END" {
+    return this.state;
   }
 }
 
